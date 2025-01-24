@@ -1,34 +1,42 @@
-<h1>New Bank Account</h1>
-
-<%= form_with(model: @bank_account, local: true) do |form| %>
-  <% if @bank_account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bank_account.errors.count, "error") %> prohibited this bank account from being saved:</h2>
-
-      <ul>
-        <% @bank_account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div class="flex items-center justify-center min-h-screen flex-col">
+  <h1 class="text-center text-2xl font-bold mb-4">New Bank Account</h1>
+  <div class="card w-full max-w-md shadow-lg bg-base-200">
+    <div class="card-body">
+      <%= form_with(model: @bank_account, local: true, class: "space-y-4") do |form| %>
+        <% if @bank_account.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@bank_account.errors.count, "error") %> prohibited this bank account from being saved:</h2>
+            <ul>
+              <% @bank_account.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-control">
+          <%= form.label :name, class: "label" %>
+          <%= form.text_field :name, class: "input input-bordered" %>
+        </div>
+
+        <div class="form-control">
+          <%= form.label :pin, class: "label" %>
+          <%= form.password_field :pin, class: "input input-bordered" %>
+        </div>
+
+        <div class="form-control">
+          <%= form.label :pin_confirmation, class: "label" %>
+          <%= form.password_field :pin_confirmation, class: "input input-bordered" %>
+        </div>
+
+        <div class="form-control mt-6">
+          <%= form.submit 'Create Bank Account', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="flex justify-center mt-4">
+        <span>Already have an account?</span>
+        <%= link_to "Login", new_session_path, class: "ml-2 text-blue-500" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name%>
-    <%= form.text_field :name%>
   </div>
-
-  <div>
-    <%= form.label :pin %><br>
-    <%= form.password_field :pin %>
-  </div>
-
-  <div>
-    <%= form.label :pin_confirmation %><br>
-    <%= form.password_field :pin_confirmation %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

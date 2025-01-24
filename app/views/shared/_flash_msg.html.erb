@@ -1,0 +1,8 @@
+<% flash.each do |type, msg|%>
+  <% css_class = type == 'alert' ? 'error' : 'success' %>
+  <div class="toast toast-top toast-center animate__animated animate__fadeIn animate__fadeOut animate__delay-2s z-50">
+    <div class="alert alert-<%= css_class %>">
+      <span><%= msg %></span>
+    </div>
+  </div>
+<% end %>

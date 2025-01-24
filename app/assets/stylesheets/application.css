@@ -8,3 +8,29 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate__fadeIn {
+  animation: fadeIn 1s forwards;
+}
+
+.animate__fadeOut {
+  animation: fadeOut 1s forwards;
+  animation-delay: 2s;
+}

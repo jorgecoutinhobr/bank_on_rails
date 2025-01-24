@@ -1,4 +1,6 @@
 class BankAccountsController < ApplicationController
+  skip_before_action :require_login, only: %i[new create]
+
   def new
     @bank_account = BankAccount.new
   end
