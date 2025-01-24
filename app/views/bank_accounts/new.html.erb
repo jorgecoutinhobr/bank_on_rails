@@ -1,0 +1,34 @@
+<h1>New Bank Account</h1>
+
+<%= form_with(model: @bank_account, local: true) do |form| %>
+  <% if @bank_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bank_account.errors.count, "error") %> prohibited this bank account from being saved:</h2>
+
+      <ul>
+        <% @bank_account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name%>
+    <%= form.text_field :name%>
+  </div>
+
+  <div>
+    <%= form.label :pin %><br>
+    <%= form.password_field :pin %>
+  </div>
+
+  <div>
+    <%= form.label :pin_confirmation %><br>
+    <%= form.password_field :pin_confirmation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
