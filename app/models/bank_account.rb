@@ -3,6 +3,8 @@ class BankAccount < ApplicationRecord
 
   before_create :generate_account_id
 
+  enum :account_type, [ :normal, :vip ]
+
   private
 
   def generate_account_id
