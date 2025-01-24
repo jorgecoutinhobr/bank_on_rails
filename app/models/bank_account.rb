@@ -5,6 +5,8 @@ class BankAccount < ApplicationRecord
 
   enum :account_type, [ :normal, :vip ]
 
+  validates :pin, format: { with: /\A\d{4}\z/, message: "Must have exactly 4 numeric digits" }
+
   private
 
   def generate_account_id
