@@ -5,7 +5,10 @@ class BankAccount < ApplicationRecord
 
   enum :account_type, [ :normal, :vip ]
 
-  validates :pin, format: { with: /\A\d{4}\z/, message: "Must have exactly 4 numeric digits" }
+  has_many :source_transactions, class_name: "BankTransaction", foreign_key: "source_account_id", dependent: :destroy
+  has_many :destination_transactions, class_name: "BankTransaction", foreign_key: "destination_account_id", dependent: :destroy
+
+  # TODO - ADD VALIDATION TO PIN FORMAT WITHOUT BROKEN TRANSACTION
 
   private
 

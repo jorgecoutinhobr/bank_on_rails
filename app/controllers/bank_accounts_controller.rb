@@ -9,7 +9,7 @@ class BankAccountsController < ApplicationController
     @bank_account = BankAccount.new(bank_account_params)
 
     if @bank_account.save
-      redirect_to root_path, notice: "Conta criada com sucesso!"
+      redirect_to root_path, notice: "Bank account was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
