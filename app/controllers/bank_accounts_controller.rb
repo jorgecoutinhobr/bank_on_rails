@@ -15,6 +15,11 @@ class BankAccountsController < ApplicationController
     end
   end
 
+  def statement
+    query = BankTransaction.where("source_account_id = ? OR destination_account_id = ?", current_account.id, current_account.id)
+    @pagy, @transactions = pagy(query, items: 10)
+  end
+
   private
 
   def bank_account_params

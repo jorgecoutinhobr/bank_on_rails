@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :bank_accounts, only: %i[new create] do
+    member do
+      get :statement
+    end
+
     resources :bank_transactions, only: %i[new create]
   end
 

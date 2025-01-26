@@ -4,8 +4,8 @@
     <div class="w-full md:w-3/4 p-4">
       <h1 class="text-3xl font-bold mb-2">Dashboard</h1>
       <div class="flex flex-wrap -mx-2">
-        <%= render 'shared/card', title: 'Saldo', subtitle: 'See your saldo', options: { msg: "R$ #{'%.2f' % current_account.balance.to_f}" } %>
-        <%= render 'shared/card', title: 'Extrato', subtitle: 'Faca uma transferencia', options: {} %>
+        <%= render 'shared/card', title: 'Balance', subtitle: 'See your balance', options: { msg: number_to_currency(current_account.balance) } %>
+        <%= render 'shared/card', title: 'Bank Statement', subtitle: 'See all your statement', options: { link_path: statement_bank_account_path(current_account) } %>
       </div>
     </div>
   </div>

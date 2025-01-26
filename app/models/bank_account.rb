@@ -10,6 +10,10 @@ class BankAccount < ApplicationRecord
 
   # TODO - ADD VALIDATION TO PIN FORMAT WITHOUT BROKEN TRANSACTION
 
+  def transfer_receiver?(transaction)
+    transaction.destination_account_id == id
+  end
+
   private
 
   def generate_account_id
