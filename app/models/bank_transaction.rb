@@ -10,7 +10,7 @@ class BankTransaction < ApplicationRecord
   validates_with VipBankTransactionValidator, if: -> { source_account.vip? }
 
   before_save :set_fee, if: :transfer?
-  before_commit :process_transaction
+  after_commit :process_transaction
 
   scope :by_account, ->(account) { where("source_account_id = ? OR destination_account_id = ?",
                                     account.id, account.id).order(created_at: :desc)}
