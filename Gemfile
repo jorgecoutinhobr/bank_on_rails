@@ -36,5 +36,5 @@ group :test do
 end
 
 gem "bcrypt", "~> 3.1.7"
-gem "pagy", "~> 8"
+gem "pagy", "~> 9"
 gem "randamu"
