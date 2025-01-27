@@ -34,14 +34,7 @@
 
       <!-- Bottom -->
       <div class="mt-auto flex flex-col justify-center w-full">
-        <!-- Settings -->
-        <div class="dropdown dropdown-top dropdown-end w-full">
-          <div tabindex="0" role="button" class="btn btn-primary w-full">Settings</div>
-          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-full p-2 shadow">
-            <li><%= link_to "Log out", session_path(current_account), data: { turbo_method: :delete } %></li>
-          </ul>
-        </div>
-        <!-- Settings -->
+        <li><%= link_to "Log out", session_path(current_account), data: { turbo_method: :delete }, class: 'btn btn-primary w-full' %></li>
       </div>
       <!-- Bottom -->
 
