@@ -9,7 +9,7 @@ a.update!(account_id: '12345')
 b.update!(account_id: '54321')
 
 options = [ :deposit, :withdrawal ]
-values = [100, 500, 777, 1000]
+values = [ 100, 500, 777, 1000 ]
 
 7.times do
   BankTransaction.create!(amount: values.sample, transaction_type: options.sample, source_account: a)
