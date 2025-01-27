@@ -14,6 +14,10 @@ class BankAccount < ApplicationRecord
     transaction.destination_account_id == id
   end
 
+  def transfer_sender?(transaction)
+    transaction.source_account_id == id
+  end
+
   private
 
   def generate_account_id

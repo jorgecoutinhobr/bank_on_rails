@@ -9,6 +9,8 @@
           <th>Source account</th>
           <th>Destination account</th>
           <th>Amount</th>
+          <th>Bank Fee</th>
+          <th>Total</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +22,8 @@
             <td><%= (transaction.source_account&.name) %></td>
             <td><%= (transaction.destination_account&.name) %></td>
             <td><%= money_tag(transaction.amount, transaction.transaction_type, current_account.transfer_receiver?(transaction)) %></td>
+            <td><%= money_tag(transaction.bank_fee) if transaction.bank_fee.present? && current_account.transfer_sender?(transaction) %></td>
+            <td><%= money_tag(transaction.total_amount(current_account.transfer_sender?(transaction)), transaction.transaction_type, current_account.transfer_receiver?(transaction)) %></td>
           </tr>
         <% end %>
       </tbody>

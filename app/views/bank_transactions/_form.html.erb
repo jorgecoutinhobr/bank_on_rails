@@ -1,9 +1,9 @@
 <%= form_with(model: [bank_account, bank_transaction], local: true, class: "form-control w-full max-w-lg", data: { controller: "navigate" }) do |form| %>
   <% if bank_transaction.errors.any? %>
-    <div id="error_explanation" class="alert alert-error shadow-lg">
-      <h2 class="font-bold"><%= pluralize(bank_transaction.errors.count, "error") %> prohibited this bank_transaction from being saved:</h2>
+    <div id="error_explanation" class="alert alert-error shadow-lg flex flex-col">
+      <h2 class="font-bold"><%= pluralize(bank_transaction.errors.count, "Error") %> prohibited this bank_transaction from being saved:</h2>
 
-      <ul class="list-disc pl-5">
+      <ul class="list-disc">
         <% bank_transaction.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -13,7 +13,7 @@
 
   <div class="form-control mb-4">
     <%= form.label :transaction_type, class: "label" %>
-    <%= form.select :transaction_type, BankTransaction.transaction_types.keys.map { |w| [w.humanize, w] }, {}, class: "select select-bordered w-full", data: { navigate_target: "transactionType", action: "change->navigate#to" } %>
+    <%= form.select :transaction_type, BankTransaction.transaction_types.keys.map { |w| [w.humanize, w] }, {}, class: "select select-bordered w-full", data: { navigate_target: "transactionType", action: "change->navigate#to", required: true } %>
   </div>
 
   <div class="form-control mb-4" id="destination_account_id_field" data-navigate-target="destinationField" style="display: none;">
@@ -23,7 +23,7 @@
 
   <div class="form-control mb-4">
     <%= form.label :amount, class: "label" %>
-    <%= form.number_field :amount, step: "0.01", class: "input input-bordered w-full" %>
+    <%= form.number_field :amount, step: "0.01", class: "input input-bordered w-full", required: true %>
   </div>
 
   <div class="form-control mt-6">

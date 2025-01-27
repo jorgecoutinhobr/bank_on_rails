@@ -9,24 +9,33 @@ class BankTransaction < ApplicationRecord
   validates_with NormalBankTransactionValidator, if: -> { source_account.normal? }
   validates_with VipBankTransactionValidator, if: -> { source_account.vip? }
 
+  before_save :set_fee, if: :transfer?
   before_commit :process_transaction
 
   def withdrawal_or_transfer?
     withdrawal? || transfer?
   end
 
+  def total_amount(is_sender)
+    return amount + (bank_fee || 0) if is_sender
+    amount
+  end
+
   private
 
   def process_transaction
-    BankTransaction.transaction do
-      if withdrawal?
-        source_account.update!(balance: source_account.balance - amount)
-      elsif deposit?
-        source_account.update!(balance: source_account.balance + amount)
-      elsif transfer?
-        source_account.update!(balance: source_account.balance - amount)
-        destination_account.update!(balance: destination_account.balance + amount)
-      end
+    if withdrawal?
+      source_account.update!(balance: source_account.balance - amount)
+    elsif deposit?
+      source_account.update!(balance: source_account.balance + amount)
+    elsif transfer?
+      source_account.update!(balance: source_account.balance - amount - bank_fee)
+      destination_account.update!(balance: destination_account.balance + amount)
     end
+  end
+
+  def set_fee
+    fee = source_account.normal? ? 8 : amount * 0.008
+    self.bank_fee = fee
   end
 end
