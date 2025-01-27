@@ -1,5 +1,6 @@
 class BankTransactionsController < ApplicationController
   before_action :set_bank_account
+  before_action :account_not_authorized
 
   def new
     @bank_transaction = @bank_account.source_transactions.new
@@ -35,5 +36,12 @@ class BankTransactionsController < ApplicationController
 
   def transaction_params
     params.require(:bank_transaction).permit(:destination_account_id, :amount, :transaction_type)
+  end
+
+  def account_not_authorized
+    return if @bank_account == current_account
+
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to root_path
   end
 end
