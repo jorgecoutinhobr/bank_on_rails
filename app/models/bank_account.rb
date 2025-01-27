@@ -8,7 +8,7 @@ class BankAccount < ApplicationRecord
   has_many :source_transactions, class_name: "BankTransaction", foreign_key: "source_account_id", dependent: :destroy
   has_many :destination_transactions, class_name: "BankTransaction", foreign_key: "destination_account_id", dependent: :destroy
 
-  # TODO - ADD VALIDATION TO PIN FORMAT WITHOUT BROKEN TRANSACTION
+  validates :pin, format: { with: /\A\d{4}\z/, message: "must be exactly 4 numeric digits" }, on: :create
 
   def transfer_receiver?(transaction)
     transaction.destination_account_id == id
