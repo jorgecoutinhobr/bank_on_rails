@@ -11,7 +11,7 @@ Para instalar o projeto, siga os passos abaixo:
 
 1. Clone o repositório:
   ```bash
-  git clone https://github.com/jorgecoutinhobr/bank_on_rails.git
+  git clone git@github.com:jorgecoutinhobr/bank_on_rails.git
   ```
 2. Navegue até o diretório do projeto:
   ```bash
