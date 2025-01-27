@@ -37,4 +37,4 @@ end
 
 gem "bcrypt", "~> 3.1.7"
 gem "pagy", "~> 8"
-gem 'randamu'
+gem "randamu"

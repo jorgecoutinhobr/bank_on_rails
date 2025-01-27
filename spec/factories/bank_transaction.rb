@@ -16,7 +16,7 @@ FactoryBot.define do
 
     trait :manager_visit do
       transaction_type { :manager_visit }
-      association :source_account, factory: [:bank_account, :vip]
+      association :source_account, factory: [ :bank_account, :vip ]
     end
   end
 end
