@@ -1,7 +1,7 @@
 class NormalBankTransactionValidator < ActiveModel::Validator
   def validate(record)
     validations = [
-      { condition: (record.withdrawal_or_transfer? && record.source_account.balance < record.amount),
+      { condition: (record.withdrawal? && record.source_account.balance < record.amount),
         message: "Insufficient balance"
       },
 

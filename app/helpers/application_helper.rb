@@ -7,8 +7,8 @@ module ApplicationHelper
   end
 
   def money_tag(amount, type = nil, receiver = false)
-    return content_tag(:span, "R#{number_to_currency(amount)}", class: "text-green-500") if type == "deposit" || receiver
-    content_tag(:span, "(R#{number_to_currency(amount)})", class: "text-red-500")
+    return content_tag(:span, "#{number_to_currency(amount)}", class: "text-green-500") if type == "deposit" || receiver
+    content_tag(:span, "(#{number_to_currency(amount)})", class: "text-red-500")
   end
 
   def formatted_date(date)
