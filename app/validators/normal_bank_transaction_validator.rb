@@ -15,7 +15,10 @@ class NormalBankTransactionValidator < ActiveModel::Validator
 
       { condition: (record.transfer? && record.destination_account.nil?),
         message: "Destination account not found"
-      }
+      },
+
+      { condition: record.manager_visit?,
+        message: "You need to be VIP to do that" }
     ]
 
     validations.each do |validation|

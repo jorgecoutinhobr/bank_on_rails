@@ -22,7 +22,7 @@
           <%= badge_tag(current_account.account_type) %>
         </a>
 
-        <button class="btn btn-warning w-full m-2">Agendar gerente</button> 
+        <%= link_to "Manager Visit", manager_visit_bank_account_bank_transactions_path(current_account), class: "btn btn-warning w-full m-2", data: { turbo_method: :post } if current_account.vip? %>
         <%= link_to 'New Transaction', new_bank_account_bank_transaction_path(current_account), class: 'btn btn-success w-full m-2' %>
         
         <%= yield :sidebar_content %>

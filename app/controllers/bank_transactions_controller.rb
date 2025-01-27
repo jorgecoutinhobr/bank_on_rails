@@ -17,6 +17,16 @@ class BankTransactionsController < ApplicationController
     end
   end
 
+  def manager_visit
+    @bank_transaction = @bank_account.source_transactions.new(transaction_type: :manager_visit, amount: 50)
+
+    if @bank_transaction.save
+      redirect_to root_path, notice: "Manager visit was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_bank_account

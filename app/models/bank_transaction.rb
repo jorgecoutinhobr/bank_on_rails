@@ -2,7 +2,7 @@ class BankTransaction < ApplicationRecord
   belongs_to :source_account, class_name: "BankAccount", validate: false
   belongs_to :destination_account, class_name: "BankAccount", optional: true, validate: false
 
-  enum :transaction_type, [ :withdrawal, :deposit, :transfer ]
+  enum :transaction_type, [ :withdrawal, :deposit, :transfer, :manager_visit ]
 
   validates :amount, numericality: { greater_than: 0 }
 
@@ -11,6 +11,9 @@ class BankTransaction < ApplicationRecord
 
   before_save :set_fee, if: :transfer?
   before_commit :process_transaction
+
+  scope :by_account, ->(account) { where("source_account_id = ? OR destination_account_id = ?",
+                                    account.id, account.id).order(created_at: :desc)}
 
   def withdrawal_or_transfer?
     withdrawal? || transfer?
@@ -31,6 +34,8 @@ class BankTransaction < ApplicationRecord
     elsif transfer?
       source_account.update!(balance: source_account.balance - amount - bank_fee)
       destination_account.update!(balance: destination_account.balance + amount)
+    elsif manager_visit?
+      source_account.update!(balance: source_account.balance - amount)
     end
   end
 
