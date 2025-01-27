@@ -36,4 +36,11 @@
   <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 <% end %>
 
+<% content_for :sidebar_content do %>
+  <div class="p-4 m-2 bg-base-100 rounded-lg shadow-md w-full">
+    <h2 class="text-xl font-semibold mb-2">Balance</h2>
+    <p class="text-2xl font-bold"><%= "R#{number_to_currency(current_account.balance)}" %></p>
+  </div>
+<% end %>
+
 <%= render 'templates/sidebar_template' %>
