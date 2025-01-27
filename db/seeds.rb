@@ -3,6 +3,8 @@ BankAccount.create!(name: "Marcelo", balance: 10000, pin: "1234", pin_confirmati
 
 a = BankAccount.first
 b = BankAccount.last
+a.update!(account_id: '12345')
+b.update!(account_id: '54321')
 
 options = [ :deposit, :withdrawal ]
 

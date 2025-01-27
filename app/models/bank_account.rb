@@ -9,6 +9,7 @@ class BankAccount < ApplicationRecord
   has_many :destination_transactions, class_name: "BankTransaction", foreign_key: "destination_account_id", dependent: :destroy
 
   validates :pin, format: { with: /\A\d{4}\z/, message: "must be exactly 4 numeric digits" }, on: :create
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def transfer_receiver?(transaction)
     transaction.destination_account_id == id
