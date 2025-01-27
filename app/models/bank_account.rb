@@ -10,6 +10,7 @@ class BankAccount < ApplicationRecord
 
   validates :pin, format: { with: /\A\d{4}\z/, message: "must be exactly 4 numeric digits" }, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name, presence: true
 
   def transfer_receiver?(transaction)
     transaction.destination_account_id == id
