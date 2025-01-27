@@ -1,5 +1,5 @@
-BankAccount.create!(name: "Jorge", balance: 10000, pin: "1234", pin_confirmation: "1234")
-BankAccount.create!(name: "Marcelo", balance: 10000, pin: "1234", pin_confirmation: "1234", account_type: :vip)
+BankAccount.create!(name: "Jorge", balance: 10000, pin: "1234", pin_confirmation: "1234", email: 'jorge@com')
+BankAccount.create!(name: "Marcelo", balance: 10000, pin: "1234", pin_confirmation: "1234", account_type: :vip, email: 'marcelo@com')
 
 a = BankAccount.first
 b = BankAccount.last
