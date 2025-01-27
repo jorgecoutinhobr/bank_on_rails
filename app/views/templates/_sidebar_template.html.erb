@@ -21,8 +21,11 @@
           <%= current_account.name.capitalize %>'s Space
           <%= badge_tag(current_account.account_type) %>
         </a>
-
-        <%= link_to "Manager Visit", manager_visit_bank_account_bank_transactions_path(current_account), class: "btn btn-warning w-full m-2", data: { turbo_method: :post } if current_account.vip? %>
+        
+        <% if current_account.vip? %>
+          <%= link_to "Manager Visit", manager_visit_bank_account_bank_transactions_path(current_account), class: "btn btn-warning w-full m-2", 
+                                                                                                           data: { turbo_method: :post, turbo_confirm: 'Are you sure?' } %>
+        <% end %>
         <%= link_to 'New Transaction', new_bank_account_bank_transaction_path(current_account), class: 'btn btn-success w-full m-2' %>
         
         <%= yield :sidebar_content %>
